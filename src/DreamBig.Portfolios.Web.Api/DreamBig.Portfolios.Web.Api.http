@@ -1,0 +1,6 @@
+@DreamBig.Portfolios.Web.Api_HostAddress = https://localhost:7288
+
+GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###

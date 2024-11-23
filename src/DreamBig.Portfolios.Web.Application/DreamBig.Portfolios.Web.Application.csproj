@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DreamBig.Portfolios.Web.Domain\DreamBig.Portfolios.Web.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalVisibleTo Include="DreamBig.Portfolios.Web.Api.IntegrationTests" />
+    <InternalVisibleTo Include="DreamBig.Portfolios.Web.Api.UnitTests" />
+  </ItemGroup>
+
+</Project>
