@@ -1,24 +1,29 @@
 ﻿namespace DreamBig.Portfolios.Web.Domain.Entities;
 
 /// <summary>
-/// Profiles Table
+/// Posts Table
 /// </summary>
-public class Profile : IEntity
+public partial class Post : IEntity
 {
     /// <summary>
-    /// Name
+    /// Profile ID
     /// </summary>
-    public string Name { get; set; } = null!;
+    public Guid ProfileId { get; set; }
 
     /// <summary>
-    /// Description
+    /// Title
     /// </summary>
-    public string Description { get; set; } = null!;
+    public string Title { get; set; } = null!;
 
     /// <summary>
-    /// About Me
+    /// URL Link
     /// </summary>
-    public string? AboutMe { get; set; }
+    public string Link { get; set; } = null!;
+
+    /// <summary>
+    /// Added Date
+    /// </summary>
+    public DateTime AddedDate { get; set; }
 
     public Guid Id { get; set; }
     public DateTime CreateTime { get; set; }

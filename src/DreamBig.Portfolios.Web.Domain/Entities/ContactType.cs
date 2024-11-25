@@ -1,24 +1,14 @@
 ﻿namespace DreamBig.Portfolios.Web.Domain.Entities;
 
 /// <summary>
-/// Profiles Table
+/// ContactTypes Table
 /// </summary>
-public class Profile : IEntity
+public partial class ContactType : IEntity
 {
-    /// <summary>
-    /// Name
-    /// </summary>
-    public string Name { get; set; } = null!;
-
     /// <summary>
     /// Description
     /// </summary>
     public string Description { get; set; } = null!;
-
-    /// <summary>
-    /// About Me
-    /// </summary>
-    public string? AboutMe { get; set; }
 
     public Guid Id { get; set; }
     public DateTime CreateTime { get; set; }

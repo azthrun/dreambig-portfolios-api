@@ -5,7 +5,7 @@ Accept: application/json
 
 ###
 
-GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/hello
+GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/test
 Accept: application/json
 
 ###
