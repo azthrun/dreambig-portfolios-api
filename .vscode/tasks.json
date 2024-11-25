@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/DreamBig.Portfolios.Web.Api/DreamBig.Portfolios.Web.Api.csproj",
+                "--configuration",
+                "Debug"
+            ],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$msCompile"
+		}
+	]
+}
