@@ -6,7 +6,6 @@ using DreamBig.Portfolios.Web.Domain.Entities;
 [JsonSerializable(typeof(Experience))]
 [JsonSerializable(typeof(Post))]
 [JsonSerializable(typeof(Profile))]
-[JsonSerializable(typeof(Session))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {
 }

@@ -8,9 +8,8 @@ namespace DreamBig.Portfolios.Web.Persistent.MySQL.Helpers;
 
 public static class DependencyInjectionExtensions
 {
-    public static IServiceCollection AddPersistentLayer(this IServiceCollection services)
+    public static IServiceCollection AddPersistentLayer(this IServiceCollection services, string connectionString)
     {
-        var connectionString = Environment.GetEnvironmentVariable("MYSQL_CONNECTION") ?? throw new Exception("MYSQL_CONNECTION environment variable not set");
         services.AddSingleton(new Secrets { MySqlConnectionString = connectionString });
         
         services.AddScoped<PortfoliosWebContext>();
