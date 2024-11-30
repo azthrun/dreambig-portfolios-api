@@ -4,6 +4,6 @@ namespace DreamBig.Portfolios.Web.Application.Abstractions;
 
 public interface IContactRepository
 {
-    Task<IEnumerable<Contact>> GetContactsAsync(string profileId);
-    Task<ContactType?> GetContactTypeAsync(string contactTypeId);
+    Task<IEnumerable<Contact>> GetContactsAsync(string profileId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<ContactType>> GetContactTypesAsync(CancellationToken cancellationToken = default);
 }

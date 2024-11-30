@@ -12,12 +12,12 @@ internal sealed class PostRepository(PortfoliosWebContext dbContext, ILogger<Pos
     private readonly ILogger<PostRepository>? _logger = logger;
 
     [DapperAot]
-    public async Task<IEnumerable<Post>> GetPostsAsync(string profileId)
+    public async Task<IEnumerable<Post>> GetPostsAsync(string profileId, CancellationToken cancellationToken = default)
     {
         try
         {
             _logger?.LogDebug("Getting posts from database for profile {ProfileId}", profileId);
-            using var connection = _dbContext.GetConnection();
+            using var connection = await _dbContext.GetConnectionAsync(cancellationToken);
             var query = "SELECT * FROM Posts WHERE profile_id = @profileId";
             var results = await connection.QueryAsync<Post>(query, new { profileId });
             return results;

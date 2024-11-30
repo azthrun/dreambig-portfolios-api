@@ -1,8 +1,8 @@
-using DreamBig.Portfolios.Web.Domain.Entities;
+using PostEntity = DreamBig.Portfolios.Web.Domain.Entities.Post;
 
 namespace DreamBig.Portfolios.Web.Application.Abstractions;
 
 public interface IPostRepository
 {
-    Task<IEnumerable<Post>> GetPostsAsync(string profileId);
+    Task<IEnumerable<PostEntity>> GetPostsAsync(string profileId, CancellationToken cancellationToken = default);
 }

@@ -4,5 +4,5 @@ namespace DreamBig.Portfolios.Web.Application.Abstractions;
 
 public interface IExperienceRepository
 {
-    Task<IEnumerable<Experience>> GetExperiencesAsync(string profileId);
+    Task<IEnumerable<Experience>> GetExperiencesAsync(string profileId, CancellationToken cancellationToken = default);
 }

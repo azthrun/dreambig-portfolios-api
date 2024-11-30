@@ -4,5 +4,5 @@ namespace DreamBig.Portfolios.Web.Application.Abstractions;
 
 public interface IProfileRepository
 {
-    Task<ProfileEntity?> GetProfileAsync();
+    Task<ProfileEntity?> GetProfileAsync(CancellationToken cancellationToken = default);
 }

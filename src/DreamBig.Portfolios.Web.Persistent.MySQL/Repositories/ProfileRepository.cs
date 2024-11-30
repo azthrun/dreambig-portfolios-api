@@ -12,12 +12,12 @@ internal sealed class ProfileRepository(PortfoliosWebContext dbContext, ILogger<
     private readonly ILogger<ProfileRepository>? _logger = logger;
 
     [DapperAot]
-    public async Task<Profile?> GetProfileAsync()
+    public async Task<Profile?> GetProfileAsync(CancellationToken cancellationToken = default)
     {
         try
         {
             _logger?.LogDebug("Getting profile from database");
-            using var connection = _dbContext.GetConnection();
+            using var connection = await _dbContext.GetConnectionAsync(cancellationToken);
             var query = "SELECT * FROM Profiles LIMIT 1";
             var results = await connection.QueryFirstOrDefaultAsync<Profile>(query);
             return results;
