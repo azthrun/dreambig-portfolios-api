@@ -1,4 +1,7 @@
+using DreamBig.Portfolios.Web.Application.Helpers;
+using DreamBig.Portfolios.Web.Application.Profile.Queries;
 using DreamBig.Portfolios.Web.Persistent.MySQL.Helpers;
+using Mediator;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 builder.WebHost.UseKestrelHttpsConfiguration();
@@ -18,9 +21,12 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 builder.Services.AddOpenApi();
 
 var connectionString = configuration.GetSection("MYSQL_CONNECTION").Value! ?? throw new Exception("MYSQL_CONNECTION environment variable not set");
+builder.Services.AddApplication();
 builder.Services.AddPersistentLayer(connectionString);
 builder.Services.AddHealthChecks()
     .AddMySql(connectionString);
+
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -30,6 +36,60 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapGet("/profile", async (IMediator mediator, ILogger<Program>? logger, CancellationToken cancellationToken) =>
+{
+    try
+    {
+        GetProfileInfoQuery query = new();
+        var profile = await mediator.Send(query, cancellationToken);
+        if (profile is null)
+        {
+            return Results.Problem(
+                title: "Not Found",
+                detail: "Profile information not found",
+                statusCode: StatusCodes.Status404NotFound
+            );
+        }
+        return Results.Ok(profile);
+    }
+    catch (Exception ex)
+    {
+        logger?.LogError(ex, "An error occurred while fetching profile information");
+        return Results.Problem(
+            title: "Bad Request",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status400BadRequest
+        );
+    }
+});
+
+app.MapGet("/posts/{profileId}", async (string profileId, IMediator mediator, ILogger<Program>? logger, CancellationToken cancellationToken) =>
+{
+    try
+    {
+        GetPostsQuery query = new() { ProfileId = profileId };
+        var profile = await mediator.Send(query, cancellationToken);
+        if (profile is null)
+        {
+            return Results.Problem(
+                title: "Not Found",
+                detail: "Posts information not found",
+                statusCode: StatusCodes.Status404NotFound
+            );
+        }
+        return Results.Ok(profile);
+    }
+    catch (Exception ex)
+    {
+        logger?.LogError(ex, "An error occurred while fetching posts");
+        return Results.Problem(
+            title: "Bad Request",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status400BadRequest
+        );
+    }
+});
 
 app.MapHealthChecks("/_health");
 

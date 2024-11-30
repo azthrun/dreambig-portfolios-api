@@ -5,7 +5,17 @@ Accept: application/json
 
 ###
 
-GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/test
+GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/_health
+Accept: application/json
+
+###
+
+GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/profile
+Accept: application/json
+
+###
+
+GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/posts/146e21c1-b18e-429b-8bfd-72f5e183f989
 Accept: application/json
 
 ###

@@ -1,7 +1,10 @@
 namespace DreamBig.Portfolios.Web.Application.Profile.Dtos;
 
 public sealed record ProfileDto(
+    Guid ProfileId,
     string OwnerName,
     string? Description,
-    ContactDto[] Contacts
+    string? AboutMeContents,
+    ContactDto[] Contacts,
+    ExperienceDto[] Experiences
 );

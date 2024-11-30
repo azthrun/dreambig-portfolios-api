@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.MySql" Version="8.0.1" />
+    <PackageReference Include="Mediator.Abstractions" Version="2.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
   </ItemGroup>
 
