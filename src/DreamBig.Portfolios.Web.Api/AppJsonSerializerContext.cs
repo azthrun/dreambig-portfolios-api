@@ -5,6 +5,8 @@ using DreamBig.Portfolios.Web.Application.Session.Dtos;
 using DreamBig.Portfolios.Web.Domain.Entities;
 using Mediator;
 
+namespace DreamBig.Portfolios.Web.Api;
+
 [JsonSerializable(typeof(Contact))]
 [JsonSerializable(typeof(ContactType))]
 [JsonSerializable(typeof(Experience))]

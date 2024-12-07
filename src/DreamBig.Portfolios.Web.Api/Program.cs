@@ -1,3 +1,4 @@
+using DreamBig.Portfolios.Web.Api;
 using DreamBig.Portfolios.Web.Application.Helpers;
 using DreamBig.Portfolios.Web.Application.Profile.Queries;
 using DreamBig.Portfolios.Web.Application.Session.Dtos;
@@ -23,11 +24,11 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 builder.Services.AddOpenApi();
 
 var connectionString = configuration.GetSection("MYSQL_CONNECTION").Value! ?? throw new Exception("MYSQL_CONNECTION environment variable not set");
+builder.Services.AddTransient<AuthenticationMiddleware>();
 builder.Services.AddApplication();
 builder.Services.AddPersistentLayer(connectionString);
 builder.Services.AddHealthChecks()
     .AddMySql(connectionString);
-
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
@@ -38,6 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<AuthenticationMiddleware>();
 
 app.MapPost("/sessions", async (SessionRequestDto request, IMediator mediator, ILogger<Program>? logger, CancellationToken cancellationToken) =>
 {
@@ -57,6 +59,7 @@ app.MapPost("/sessions", async (SessionRequestDto request, IMediator mediator, I
         );
     }
 })
+.AllowAnonymous()
 .WithName("GetSession")
 .WithDescription("Get session information, and the sesssion id is required for all other requests");
 
@@ -118,6 +121,6 @@ app.MapGet("/posts/{profileId}", async (string profileId, IMediator mediator, IL
 .WithName("GetPosts")
 .WithDescription("Get posts information for a profile");
 
-app.MapHealthChecks("/_health");
+app.MapHealthChecks("/_health").AllowAnonymous();
 
 app.Run();
