@@ -19,3 +19,15 @@ GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/posts/146e21c1-b18e-429b-8bfd-72
 Accept: application/json
 
 ###
+
+POST {{DreamBig.Portfolios.Web.Api_HostAddress}}/sessions
+Content-Type: application/json
+
+{
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+}
+
+###
+
+GET {{DreamBig.Portfolios.Web.Api_HostAddress}}/openapi/v1.json
+Accept: application/json

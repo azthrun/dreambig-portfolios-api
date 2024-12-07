@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using DreamBig.Portfolios.Web.Application.Post.Dtos;
 using DreamBig.Portfolios.Web.Application.Profile.Dtos;
+using DreamBig.Portfolios.Web.Application.Session.Dtos;
 using DreamBig.Portfolios.Web.Domain.Entities;
 using Mediator;
 
@@ -13,6 +14,8 @@ using Mediator;
 [JsonSerializable(typeof(ExperienceDto))]
 [JsonSerializable(typeof(ProfileDto))]
 [JsonSerializable(typeof(PostDto[]))]
+[JsonSerializable(typeof(SessionRequestDto))]
+[JsonSerializable(typeof(SessionResponseDto))]
 [JsonSerializable(typeof(IMediator))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {

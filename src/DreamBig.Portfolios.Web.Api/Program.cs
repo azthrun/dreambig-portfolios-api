@@ -1,5 +1,7 @@
 using DreamBig.Portfolios.Web.Application.Helpers;
 using DreamBig.Portfolios.Web.Application.Profile.Queries;
+using DreamBig.Portfolios.Web.Application.Session.Dtos;
+using DreamBig.Portfolios.Web.Application.Session.Queries;
 using DreamBig.Portfolios.Web.Persistent.MySQL.Helpers;
 using Mediator;
 
@@ -37,6 +39,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapPost("/sessions", async (SessionRequestDto request, IMediator mediator, ILogger<Program>? logger, CancellationToken cancellationToken) =>
+{
+    try
+    {
+        GetSessionQuery query = new() { UserAgent = request.UserAgent };
+        var session = await mediator.Send(query, cancellationToken);
+        return Results.Ok(session);
+    }
+    catch (Exception ex)
+    {
+        logger?.LogError(ex, "An error occurred while fetching session");
+        return Results.Problem(
+            title: "Bad Request",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status400BadRequest
+        );
+    }
+})
+.WithName("GetSession")
+.WithDescription("Get session information, and the sesssion id is required for all other requests");
+
 app.MapGet("/profile", async (IMediator mediator, ILogger<Program>? logger, CancellationToken cancellationToken) =>
 {
     try
@@ -62,7 +85,9 @@ app.MapGet("/profile", async (IMediator mediator, ILogger<Program>? logger, Canc
             statusCode: StatusCodes.Status400BadRequest
         );
     }
-});
+})
+.WithName("GetProfile")
+.WithDescription("Get profile information");
 
 app.MapGet("/posts/{profileId}", async (string profileId, IMediator mediator, ILogger<Program>? logger, CancellationToken cancellationToken) =>
 {
@@ -89,7 +114,9 @@ app.MapGet("/posts/{profileId}", async (string profileId, IMediator mediator, IL
             statusCode: StatusCodes.Status400BadRequest
         );
     }
-});
+})
+.WithName("GetPosts")
+.WithDescription("Get posts information for a profile");
 
 app.MapHealthChecks("/_health");
 

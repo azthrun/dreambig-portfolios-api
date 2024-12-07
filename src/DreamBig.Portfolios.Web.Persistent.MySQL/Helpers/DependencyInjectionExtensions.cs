@@ -17,6 +17,7 @@ public static class DependencyInjectionExtensions
         services.AddScoped<IExperienceRepository, ExperienceRepository>();
         services.AddScoped<IPostRepository, PostRepository>();
         services.AddScoped<IProfileRepository, ProfileRepository>();
+        services.AddScoped<ISessionRepository, SessionRepository>();
 
         return services;
     }
