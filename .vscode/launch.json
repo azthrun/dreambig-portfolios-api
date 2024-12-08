@@ -12,8 +12,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "ASPNETCORE_HTTP_PORTS": "7288",
                 "ASPNETCORE_HTTPS_PORTS": "7289",
-                "MYSQL_CONNECTION": "Server=127.0.0.1;Port=3306;Database=PortfoliosWeb;User=root;Password=Cxzcxz2536;",
-                "ClientSecret": "63b4ad1a-2abd-4b97-bdf2-b2261a2f50a8"
+                "MYSQL_CONNECTION": "Server=127.0.0.1;Port=3306;Database=PortfoliosWeb;User=root;Password=Cxzcxz2536;"
             }
         }
     ]
